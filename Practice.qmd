@@ -1,0 +1,113 @@
+---
+title: "Practice Exercises"
+format: html
+---
+
+```{python}
+import math
+import pandas as pd
+import numpy as np
+```
+
+# 1.1 Exercises 1.
+
+1.  **What is data mining? In your answer, address the following:**
+
+Data mining is a discipline interested in the process of knowledge discovery in data through data cleaning, processing, pattern recognition and analysis.
+
+Do you think that data mining is also the result of the evolution of machine learning research? Can you present such views based on the historical progress of this discipline? Do the same for the fields of statistics and pattern recognition. (d) Describe the steps involved in data mining when viewed as a process of knowledge discovery
+
+Data cleaning --\> data exploration --\> data processing --\> data integration --\> data analysis --\> data visualization
+
+2.  **How is a data warehouse diﬀerent from a database? How are they similar?**
+
+    **Data base:** raw, unprocessed data often stored in relational tables linked by keys and indexes.
+
+    **Data warehouse:** highly structured, cleaned and processed data that is ready for immediate analysis. Often takes the form of a data cube which includes different levels of abstraction and granularity.
+
+3.  **Deﬁne each of the following data mining functionalities:**
+
+    -   **Characterization:** A data mining technique used to characterize a dataset based in terms of the types of variables it contains and the relationships between variables.
+        - Cluster analysis (PCA)
+
+    -   **Discrimination**: Techniques used to determine differences between features or clusters of features.
+        - PCA
+
+    -   **Association** and correlation analysis: Techniques used to determine relationships (and their strength) in a dataset. Can use correlational analysis, classification and regression
+        - Regression
+        - Correlational analysis
+
+    -   **Classiﬁcation**: techniques used to identify
+
+    -   **Regression**:
+
+    -   Clustering, outlier analysis.
+
+**Give examples of each data mining functionality, using a real-life database that you are familiar with**
+
+What is the diﬀerence between discrimination and classiﬁcation? 
+
+Discrimination is interested 
+
+Between characterization and clus-tering? 
+
+Between classiﬁcation and regression? 
+
+For each of these pairs of tasks, how are they similar?
+
+# Chapter 2
+
+1. Give three additional commonly used statistical measures (i.e., not illustrated in this chapter) for the characterization of data dispersion, and discuss how they can be computed efficiently in large databases
+
+    1. find median of dataset (Q3) 25
+    2. find median of lower half (Q1) 20
+    3. find median of upper half (Q4) 35
+
+```{python}
+
+data = {
+    'Age': [13, 15, 16, 16, 19, 20, 20, 21, 22, 22, 25, 25, 25, 25, 30, 33, 33, 35, 35, 35, 35, 36, 40, 45, 46, 52, 70]
+}
+
+df = pd.DataFrame(data)
+print(df)
+
+df.mean()
+df.median() # Q2
+df.mode() # bimodal data
+
+
+Q1 = df.quantile(0.25)
+Q3 = df.quantile(0.75)
+min_val = df.min()
+max_val = df.max()
+median = df.median()
+
+five_number_summary = {
+    'Minimum': min_val,
+    'Q1': Q1,
+    'Median': median,
+    'Q3': Q3,
+    'Maximum': max_val
+}
+
+print(five_number_summary)
+
+```
+
+```{python}
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+# Generate a Q-Q plot
+stats.probplot(df['Age'], dist="norm", plot=plt)
+plt.title('Q-Q Plot')
+plt.show()
+```
+
+```{python}
+df.median()
+```
+```{python}
+df.hist()
+```
